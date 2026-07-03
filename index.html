@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muzziey_Toxin — Software Engineer</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
+<style>
+:root{
+  --my:#8ecec4a2;
+  --bg:#0D1F38;
+  --bg-alt:#122A47;
+  --bg-alt-2:#0A1830;
+  --grid-line:rgba(234,241,251,.06);
+  --grid-line-strong:rgba(234,241,251,.12);
+  --ink:#EAF1FB;
+  --muted:#8CA2C0;
+  --muted-2:#5E7595;
+  --accent:#fadb84;
+  --accent-dim:rgba(255,122,69,.14);
+  --paper:#F3EFE4;
+  --paper-ink:#1B2430;
+  --paper-muted:#5B5646;
+  --line:#2A4468;
+  --display:'Space Grotesk',sans-serif;
+  --body:'Inter',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --radius:14px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:var(--body);scroll-behavior:smooth;}
+
+body{
+    color:var(--ink);
+    overflow-x:hidden;
+
+    background:
+        linear-gradient(
+            rgba(4,18,30,.60),
+            rgba(4,18,30,.60)
+        ),
+        url("assets/images/LOGO.png") center center/cover fixed no-repeat;
+
+    background-color:var(--bg);
+}
+
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+img,svg{display:block;max-width:100%;}
+
+::selection{background:var(--accent);color:var(--bg);}
+
+:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 6%;}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:22px;
+}
+.eyebrow::before{
+  content:'';
+  width:22px;height:1px;
+  background:var(--accent);
+  display:inline-block;
+}
+
+.sheet-label{
+  font-family:var(--mono);
+  font-size:12.5px;
+  letter-spacing:.14em;
+  color:var(--muted-2);
+  text-transform:uppercase;
+}
+
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.01em;color:var(--ink);}
+
+section{position:relative;padding:120px 0;}
+.divider{height:1px;width:100%;background:var(--grid-line-strong);}
+
+/* ==================== NAV ==================== */
+nav{
+  position:fixed;
+  top:16px;              /* pushes it slightly down */
+  left:50%;
+  transform:translateX(-50%);
+  width:92%;
+  height:72px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 28px;
+
+  background:rgba(13, 31, 56, 0.55); /* glass base */
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
+
+  box-shadow:0 10px 40px rgba(0,0,0,0.35);
+  z-index:999;
+
+}
+.nav-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.logo{
+    display:flex;
+    align-items:center;
+    text-decoration:none;
+}
+
+.logo img{
+    height:60px;
+    width:auto;
+    object-fit:contain;
+    transition:all .35s ease;
+}
+
+.logo:hover img{
+    transform:scale(1.05);
+}
+.menu{display:flex;gap:34px;align-items:center;}
+.menu a{
+  position:relative;font-size:14.5px;color:var(--muted);
+  transition:.25s;
+}
+.menu a:hover{color:var(--ink);}
+.menu a::after{
+  content:'';position:absolute;left:0;bottom:-6px;width:0%;height:1px;
+  background:var(--accent);transition:.3s;
+}
+.menu a:hover::after{width:100%;}
+.hire{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:10px 20px;
+
+    border-radius:10px;
+
+    background:var(--accent);
+    color:var(--bg);
+
+    font-size:13px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.hire:hover{
+    transform:translateY(-2px);
+}
+.nav-toggle{
+  display:none;
+  background:none;
+  border:none;
+  cursor:pointer;
+  width:40px;
+  height:40px;
+  position:relative;
+}
+
+.burger{
+  width:26px;
+  height:18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.burger span{
+  display:block;
+  height:2px;
+  width:100%;
+  background:var(--ink);
+  border-radius:2px;
+  transition:0.3s ease;
+}
+.nav-toggle.active .burger span:nth-child(1){
+  transform:rotate(45deg) translate(5px,5px);
+}
+
+.nav-toggle.active .burger span:nth-child(2){
+  opacity:0;
+}
+
+.nav-toggle.active .burger span:nth-child(3){
+  transform:rotate(-45deg) translate(5px,-5px);
+}
+/* animation when active (X icon) */
+.menu.active ~ .nav-toggle .burger span:nth-child(1){
+  transform:rotate(45deg) translateY(7px);
+}
+
+.menu.active ~ .nav-toggle .burger span:nth-child(2){
+  opacity:0;
+}
+
+.menu.active ~ .nav-toggle .burger span:nth-child(3){
+  transform:rotate(-45deg) translateY(-7px);
+}
+/* ==================== HERO ==================== */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1.05fr .95fr;
+  align-items:center;gap:60px;
+  padding-top:76px;
+}
+.hero h1{font-size:clamp(40px,5vw,66px);line-height:1.08;margin-bottom:24px;}
+.hero h1 span{color:var(--accent);}
+.hero p{font-size:17px;line-height:1.7;color:var(--muted);max-width:490px;margin-bottom:38px;}
+.buttons{display:flex;gap:16px;flex-wrap:wrap;}
+.btn-primary{
+  padding:15px 30px;background:var(--accent);color:var(--bg-alt-2);
+  border:1px solid var(--accent);border-radius:6px;font-weight:600;font-size:14.5px;
+  cursor:pointer;transition:.3s;
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px var(--accent-dim);}
+.btn-secondary{
+  padding:15px 30px;background:transparent;color:var(--ink);
+  border:1px solid var(--line);border-radius:6px;font-size:14.5px;font-weight:500;
+  cursor:pointer;transition:.3s;
+}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
+
+.blueprint{
+  position:relative;
+  background:var(--bg-alt);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:34px 28px 26px;
+}
+.blueprint-head{
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:11.5px;color:var(--muted-2);
+  letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:22px;padding-bottom:14px;border-bottom:1px dashed var(--line);
+}
+.diagram-path{
+  fill:none;stroke:#5D8FC9;stroke-width:1.6;
+  stroke-dasharray:1000;stroke-dashoffset:1000;
+  animation:draw 2.6s ease forwards .3s;
+}
+.diagram-node-rect{fill:var(--bg-alt-2);stroke:#5D8FC9;stroke-width:1.4;}
+.diagram-node-text{fill:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:11px;}
+.diagram-dim{stroke:var(--muted-2);stroke-width:1;}
+.diagram-dim-text{fill:var(--muted-2);font-family:'IBM Plex Mono',monospace;font-size:9.5px;}
+@keyframes draw{to{stroke-dashoffset:0;}}
+
+/* ==================== ABOUT / TITLE BLOCK ==================== */
+.about-grid{
+  display:grid;grid-template-columns:1.2fr .8fr;gap:70px;align-items:start;
+}
+.about-grid h2{font-size:clamp(28px,3.2vw,42px);margin-bottom:22px;line-height:1.2;}
+.about-grid p{color:var(--muted);font-size:16px;line-height:1.85;margin-bottom:18px;max-width:520px;}
+
+.title-block{
+  background:var( --my);
+  color:var(--paper-ink);
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+}
+.title-block-header{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--paper-ink);color:var(--paper);
+  padding:10px 20px;
+}
+.title-block-row{
+  display:flex;justify-content:space-between;
+  padding:14px 20px;border-bottom:1px solid rgba(27,36,48,.12);
+  font-family:var(--mono);font-size:13px;
+}
+.title-block-row:last-child{border-bottom:none;}
+.title-block-row span:first-child{color:var(--paper-muted);}
+.title-block-row span:last-child{font-weight:600;text-align:right;}
+
+/* ==================== SERVICES ==================== */
+.section-head{margin-bottom:56px;max-width:640px;}
+.section-head h2{font-size:clamp(28px,3.2vw,42px);line-height:1.2;}
+.section-head p{color:var(--muted);margin-top:16px;font-size:16px;line-height:1.7;}
+
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--grid-line-strong);border:1px solid var(--grid-line-strong);border-radius:var(--radius);overflow:hidden;}
+.service-card{background:var(--bg-alt);padding:36px 30px;transition:.3s;}
+.service-card:hover{background:var(--bg-alt-2);}
+.service-index{font-family:var(--mono);font-size:12px;color:var(--muted-2);margin-bottom:20px;}
+.service-card i{color:var(--accent);font-size:22px;margin-bottom:18px;display:block;}
+.service-card h3{font-size:18px;margin-bottom:10px;}
+.service-card p{color:var(--muted);font-size:14.5px;line-height:1.65;}
+
+@media(max-width:900px){.services-grid{grid-template-columns:1fr;}}
+
+/* ==================== SOLUTIONS ==================== */
+.solutions-list{display:flex;flex-direction:column;}
+.solution-row{
+  display:grid;grid-template-columns:100px 1fr 1fr;gap:30px;
+  padding:32px 0;border-top:1px solid var(--grid-line-strong);
+  align-items:center;
+}
+.solutions-list .solution-row:last-child{border-bottom:1px solid var(--grid-line-strong);}
+.solution-num{font-family:var(--mono);color:var(--accent);font-size:14px;}
+.solution-row h3{font-size:20px;}
+.solution-row p{color:var(--muted);font-size:15px;line-height:1.7;}
+
+@media(max-width:900px){
+  .solution-row{grid-template-columns:1fr;gap:8px;}
+}
+
+/* ==================== PRICING ==================== */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.price-card{
+  background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--radius);
+  padding:38px 30px;display:flex;flex-direction:column;
+}
+.price-card.featured{border-color:var(--accent);position:relative;}
+.price-card.featured::before{
+  content:'RECOMMENDED';font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  color:var(--bg);background:var(--accent);padding:5px 12px;border-radius:20px;
+  position:absolute;top:-13px;left:30px;
+}
+.price-name{font-family:var(--mono);font-size:13px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
+.price-amount{font-family:var(--display);font-size:38px;margin-bottom:6px;}
+.price-amount span{font-size:15px;color:var(--muted);font-family:var(--body);font-weight:400;}
+.price-desc{color:var(--muted);font-size:14px;margin-bottom:26px;}
+.price-features{margin-bottom:30px;flex-grow:1;}
+.price-features li{
+  font-size:14.5px;color:var(--ink);padding:9px 0;border-top:1px dashed var(--grid-line-strong);
+  display:flex;gap:10px;
+}
+.price-features li:first-child{border-top:none;}
+.price-features i{color:var(--accent);font-size:13px;margin-top:3px;}
+.price-btn{
+  text-align:center;padding:13px;border-radius:6px;border:1px solid var(--line);
+  font-weight:600;font-size:14px;transition:.3s;
+}
+.price-card.featured .price-btn{background:var(--accent);color:var(--bg-alt-2);border-color:var(--accent);}
+.price-btn:hover{border-color:var(--accent);color:var(--accent);}
+.price-card.featured .price-btn:hover{opacity:.85;color:var(--bg-alt-2);}
+
+@media (max-width:900px){
+
+    .pricing-grid{
+        grid-template-columns:repeat(3,1fr);
+        gap:10px;
+    }
+
+    .price-card{
+        padding:18px 12px;
+    }
+
+    .price-name{
+        font-size:10px;
+    }
+
+    .price-amount{
+        font-size:22px;
+    }
+
+    .price-desc{
+        font-size:12px;
+        margin-bottom:16px;
+    }
+
+    .price-features li{
+        font-size:11px;
+        padding:6px 0;
+    }
+
+    .price-btn{
+        padding:10px;
+        font-size:12px;
+    }
+}
+/* ==================== PROJECTS ==================== */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.project-card{
+  background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;transition:.3s;
+}
+.project-card:hover{transform:translateY(-6px);border-color:var(--accent);}
+.project-thumb{
+  height:160px;position:relative;overflow:hidden;
+  background:
+    linear-gradient(var(--grid-line-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-strong) 1px, transparent 1px),
+    var(--bg-alt-2);
+  background-size:20px 20px;
+  display:flex;align-items:center;justify-content:center;
+}
+.project-thumb i{font-size:34px;color:var(--muted-2);}
+.project-body{padding:26px;}
+.project-tag{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;display:block;}
+.project-body h3{font-size:18px;margin-bottom:10px;}
+.project-body p{color:var(--muted);font-size:14px;line-height:1.65;margin-bottom:16px;}
+.project-stack{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.project-stack span{
+  font-family:var(--mono);font-size:11px;color:var(--muted);
+  border:1px solid var(--line);padding:4px 9px;border-radius:20px;
+}
+.project-link{font-size:13.5px;color:var(--ink);font-weight:600;display:inline-flex;align-items:center;gap:6px;}
+.project-link i{font-size:11px;transition:.3s;}
+.project-card:hover .project-link i{transform:translateX(4px);}
+
+@media(max-width:900px){.projects-grid{grid-template-columns:1fr;}}
+
+/* ==================== CONTACT ==================== */
+.contact-grid{display:grid;grid-template-columns:1fr .8fr;gap:60px;}
+.form-card{background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--radius);padding:40px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+.field{display:flex;flex-direction:column;gap:8px;}
+.field.full{grid-column:1/-1;}
+.field label{font-family:var(--mono);font-size:11.5px;color:var(--muted-2);letter-spacing:.08em;text-transform:uppercase;}
+.field input,.field select,.field textarea{
+  background:var(--bg-alt-2);border:1px solid var(--line);border-radius:6px;
+  padding:12px 14px;color:var(--ink);font-size:14.5px;font-family:var(--body);
+}
+.field textarea{resize:vertical;min-height:110px;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);outline:none;}
+.form-card .btn-primary{width:100%;margin-top:8px;}
+
+.contact-info .title-block{margin-bottom:24px;}
+.contact-meta{display:flex;flex-direction:column;gap:18px;}
+.contact-meta-item{display:flex;gap:14px;align-items:flex-start;}
+.contact-meta-item i{color:var(--accent);font-size:17px;margin-top:3px;}
+.contact-meta-item span{display:block;font-family:var(--mono);font-size:11px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;}
+.contact-meta-item strong{font-size:15px;font-weight:500;}
+
+@media(max-width:900px){
+  .contact-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+}
+
+/* ==================== FOOTER ==================== */
+footer{padding:44px 6%;border-top:1px solid var(--grid-line-strong);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.footer-left{font-family:var(--mono);font-size:12.5px;color:var(--muted-2);}
+.footer-social{display:flex;gap:18px;}
+.footer-social a{color:var(--muted);font-size:16px;transition:.25s;}
+.footer-social a:hover{color:var(--accent);}
+
+@media(max-width:600px){
+  section{padding:80px 0;}
+  .hero{grid-template-columns:1fr;padding-top:110px;}
+  .about-grid{grid-template-columns:1fr;}
+}
+@media (max-width: 900px){
+
+  nav{
+    width:94%;
+    height:64px;
+    padding:0 18px;
+    border-radius:14px;
+  }
+
+  .logo img{
+    height:44px;
+  }
+
+  .menu{
+    position:fixed;
+    top:84px;
+    left:50%;
+    transform:translateX(-50%) scale(0.98);
+
+    width:92%;
+    height:auto;
+
+    background:rgba(13, 31, 56, 0.92);
+    backdrop-filter:blur(20px);
+
+    flex-direction:column;
+    gap:18px;
+
+    padding:24px 0;
+
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,0.08);
+
+    opacity:0;
+    pointer-events:none;
+    transition:0.25s ease;
+  }
+
+  .menu.active{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateX(-50%) scale(1);
+  }
+
+  .menu li{
+    width:100%;
+    text-align:center;
+  }
+
+  .menu a{
+    font-size:16px;
+    padding:10px 0;
+    display:block;
+  }
+
+ .hire{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:8px 18px;
+
+    font-size:13px;
+    font-weight:600;
+
+    background:var(--accent);
+    color:var(--bg);
+
+    border-radius:10px;
+
+    white-space:nowrap;
+}
+  .nav-toggle{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+}
+/* ================= FAQ ================= */
+
+.faq{
+
+max-width:900px;
+margin:auto;
+
+display:flex;
+flex-direction:column;
+gap:18px;
+
+}
+
+.faq-item{
+
+background:rgba(255,255,255,.04);
+
+border:1px solid var(--line);
+
+border-radius:16px;
+
+overflow:hidden;
+
+transition:.35s;
+
+backdrop-filter:blur(12px);
+
+}
+
+.faq-item:hover{
+
+border-color:var(--accent);
+
+transform:translateY(-2px);
+
+}
+
+.faq-question{
+
+width:100%;
+
+padding:22px 26px;
+
+background:none;
+
+border:none;
+
+cursor:pointer;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+color:white;
+
+font-size:17px;
+
+font-weight:600;
+
+}
+
+.faq-question i{
+
+color:var(--accent);
+
+transition:.35s;
+
+}
+
+.faq-answer{
+
+max-height:0;
+
+overflow:hidden;
+
+transition:max-height .45s ease;
+
+}
+
+.faq-answer p{
+
+padding:0 26px 24px;
+
+color:var(--muted);
+
+line-height:1.8;
+
+font-size:15px;
+
+}
+
+.faq-item.active .faq-answer{
+
+max-height:220px;
+
+}
+
+.faq-item.active i{
+
+transform:rotate(45deg);
+
+}
+/* ================= FLOATING BUTTONS ================= */
+
+.floating-contact{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+
+    z-index:1000;
+}
+
+.contact-btn{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:14px 18px;
+
+    border-radius:50px;
+
+    color:#fff;
+    text-decoration:none;
+
+    font-weight:600;
+    font-size:15px;
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+    transition:.3s;
+}
+
+.contact-btn:hover{
+    transform:translateY(-4px) scale(1.03);
+}
+
+.contact-btn i{
+    font-size:20px;
+}
+
+.whatsapp{
+    background:#25D366;
+}
+
+.calendar{
+    background:var(--accent);
+    color:var(--bg);
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .floating-contact{
+        right:15px;
+        bottom:18px;
+    }
+
+    .contact-btn{
+        padding:14px;
+        border-radius:50%;
+        width:58px;
+        height:58px;
+        justify-content:center;
+    }
+
+    .contact-btn span{
+        display:none;
+    }
+
+    .contact-btn i{
+        font-size:24px;
+    }
+
+}
+.project-actions{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:18px;
+}
+
+.project-demo{
+
+padding:8px 14px;
+
+background:var(--accent);
+
+color:var(--bg);
+
+border-radius:6px;
+
+font-size:13px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.faq-item.active .faq-answer{
+
+max-height:220px;
+
+}
+
+.faq-item.active i{
+
+transform:rotate(45deg);
+
+}
+
+/* ================= FLOATING BUTTONS ================= */
+
+.floating-contact{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+
+    z-index:1000;
+}
+
+.contact-btn{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:14px 18px;
+
+    border-radius:50px;
+
+    color:#fff;
+    text-decoration:none;
+
+    font-weight:600;
+    font-size:15px;
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+    transition:.3s;
+}
+
+.contact-btn:hover{
+    transform:translateY(-4px) scale(1.03);
+}
+
+.contact-btn i{
+    font-size:20px;
+}
+
+.whatsapp{
+    background:#25D366;
+}
+
+.calendar{
+    background:var(--accent);
+    color:var(--bg);
+}
+/* ================= PROJECT MODAL ================= */
+
+.project-modal{
+
+position:fixed;
+inset:0;
+
+background:rgba(0,0,0,.82);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+opacity:0;
+visibility:hidden;
+
+transition:.35s;
+
+z-index:9999;
+
+backdrop-filter:blur(10px);
+
+}
+
+.project-modal.show{
+
+opacity:1;
+visibility:visible;
+
+}
+
+.modal-content{
+
+width:min(1000px,92%);
+
+background:var(--bg-alt);
+
+border:1px solid var(--line);
+
+border-radius:18px;
+
+padding:35px;
+
+position:relative;
+
+animation:popup .35s ease;
+
+}
+
+@keyframes popup{
+
+from{
+
+opacity:0;
+transform:scale(.92);
+
+}
+
+to{
+
+opacity:1;
+transform:scale(1);
+
+}
+
+}
+
+.close-modal{
+
+position:absolute;
+
+top:18px;
+right:18px;
+
+background:none;
+border:none;
+
+color:white;
+
+font-size:28px;
+
+cursor:pointer;
+
+}
+
+.modal-content h2{
+
+margin-bottom:15px;
+
+}
+
+.modal-description{
+
+color:var(--muted);
+
+margin-bottom:25px;
+
+line-height:1.7;
+
+}
+
+.modal-image{
+
+height:500px;
+
+overflow:hidden;
+
+border-radius:14px;
+
+background:#000;
+
+}
+
+.modal-image img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+}
+
+.image-buttons{
+
+display:flex;
+justify-content:space-between;
+
+margin:18px 0;
+
+}
+
+.image-buttons button{
+
+width:45px;
+height:45px;
+
+border:none;
+
+border-radius:50%;
+
+background:var(--accent);
+
+cursor:pointer;
+
+font-size:18px;
+
+}
+
+.thumbs{
+
+display:flex;
+
+gap:12px;
+
+overflow-x:auto;
+
+padding-top:10px;
+
+}
+
+.thumbs img{
+
+width:110px;
+
+height:70px;
+
+object-fit:cover;
+
+border-radius:8px;
+
+cursor:pointer;
+
+opacity:.6;
+
+transition:.3s;
+
+border:2px solid transparent;
+
+}
+
+.thumbs img:hover,
+.thumbs img.active{
+
+opacity:1;
+
+border-color:var(--accent);
+
+}
+
+@media(max-width:768px){
+
+.modal-image{
+
+height:250px;
+
+}
+
+.modal-content{
+
+padding:20px;
+
+}
+
+}
+.modal-buttons{
+    margin-bottom:20px;
+}
+
+.demo-btn{
+    padding:12px 22px;
+    background:var(--accent);
+    color:var(--bg);
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.demo-btn:hover{
+    transform:translateY(-2px);
+}
+
+.video-container{
+
+    display:none;
+
+    margin-top:25px;
+
+}
+
+.video-container.show{
+
+    display:block;
+
+}
+
+.video-container video{
+
+    width:100%;
+
+    border-radius:12px;
+
+    border:1px solid var(--line);
+
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<a href="index.html" class="logo">
+    <img src="assets/images/finallogo.png" alt="Muzziey Toxin Logo">
+</a>
+<div class="nav-actions">
+
+    <a href="https://calendly.com/muzzieytoxin/30min" class="hire">Book A Call</a>
+
+    <button class="nav-toggle" id="navToggle">
+        <div class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+<ul class="menu" id="menu">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">My Offer</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#solutions">FAQ</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+</ul>
+
+</div>
+
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero wrap" id="home">
+  <div>
+    <div class="eyebrow">Software Developer — Systems &amp; Products</div>
+    <h1>I write my own blueprint.<br>Then I <span>build it.</span></h1>
+    <p>Full stack developer designing custom software solutions, booking systems and business management platforms that help companies automate their operations and grow with fewer moving parts to worry about.</p>
+    <div class="buttons">
+      <a href="#contact" class="btn-primary">Need A Website?</a>
+     <a href="#projects" class="btn-secondary">Previous Work</a>
+    </div>
+  </div>
+
+  <div class="blueprint">
+    <div class="blueprint-head">
+      <span>SHEET 00 — SYSTEM OVERVIEW</span>
+      <span>SCALE N.T.S.</span>
+    </div>
+    <svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg">
+      <!-- nodes -->
+      <rect class="diagram-node-rect" x="20" y="20" width="100" height="46" rx="6"/>
+      <text class="diagram-node-text" x="70" y="48" text-anchor="middle">Client</text>
+
+      <rect class="diagram-node-rect" x="160" y="20" width="100" height="46" rx="6"/>
+      <text class="diagram-node-text" x="210" y="48" text-anchor="middle">API</text>
+
+      <rect class="diagram-node-rect" x="300" y="20" width="100" height="46" rx="6"/>
+      <text class="diagram-node-text" x="350" y="48" text-anchor="middle">Database</text>
+
+      <rect class="diagram-node-rect" x="160" y="130" width="100" height="46" rx="6"/>
+      <text class="diagram-node-text" x="210" y="158" text-anchor="middle">Auth</text>
+
+      <rect class="diagram-node-rect" x="20" y="130" width="100" height="46" rx="6"/>
+      <text class="diagram-node-text" x="70" y="158" text-anchor="middle">Dashboard</text>
+
+      <rect class="diagram-node-rect" x="300" y="130" width="100" height="46" rx="6"/>
+      <text class="diagram-node-text" x="350" y="158" text-anchor="middle">Payments</text>
+
+      <!-- connections -->
+      <path class="diagram-path" d="M120 43 H160"/>
+      <path class="diagram-path" d="M260 43 H300"/>
+      <path class="diagram-path" d="M210 66 V130"/>
+      <path class="diagram-path" d="M160 153 H120"/>
+      <path class="diagram-path" d="M260 153 H300"/>
+
+      <!-- dimension lines -->
+      <line class="diagram-dim" x1="20" y1="200" x2="400" y2="200"/>
+      <line class="diagram-dim" x1="20" y1="195" x2="20" y2="205"/>
+      <line class="diagram-dim" x1="400" y1="195" x2="400" y2="205"/>
+      <text class="diagram-dim-text" x="210" y="216" text-anchor="middle">FULL STACK — DESIGN TO DEPLOY</text>
+
+      <text class="diagram-dim-text" x="20" y="250">REV. 2026.07</text>
+      <text class="diagram-dim-text" x="20" y="266">DRAWN — M. TOXIN</text>
+      <text class="diagram-dim-text" x="20" y="282">STATUS — AVAILABLE</text>
+    </svg>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ==================== PRICING ==================== -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="eyebrow">02 — Pricing</div>
+    <div class="section-head">
+      <h2>Packages</h2>
+      <p>Starting points — every project gets a fixed quote after a short scoping call.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-name">Starter</div>
+        <div class="price-amount">R999 <span>from</span></div>
+        <div class="price-desc">A focused site or single-purpose tool.</div>
+        <ul class="price-features">
+          <li><i class="fa-solid fa-check"></i>Up to 5 pages / views</li>
+          <li><i class="fa-solid fa-check"></i>Responsive design</li>
+          <li><i class="fa-solid fa-check"></i>Contact / booking form</li>
+          <li><i class="fa-solid fa-check"></i>2 weeks delivery</li>
+        </ul>
+        <a href="#contact" class="price-btn">Start Here</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-name">Growth</div>
+        <div class="price-amount">R2,999 <span>from</span></div>
+        <div class="price-desc">A full web app with real functionality.</div>
+        <ul class="price-features">
+          <li><i class="fa-solid fa-check"></i>Custom web application</li>
+          <li><i class="fa-solid fa-check"></i>User accounts &amp; roles</li>
+          <li><i class="fa-solid fa-check"></i>Database &amp; API integrations</li>
+          <li><i class="fa-solid fa-check"></i>4–6 weeks delivery</li>
+        </ul>
+        <a href="#contact" class="price-btn">Start Here</a>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Enterprise</div>
+        <div class="price-amount">Custom</div>
+        <div class="price-desc">A full business management system.</div>
+        <ul class="price-features">
+          <li><i class="fa-solid fa-check"></i>Multi-module platform</li>
+          <li><i class="fa-solid fa-check"></i>Custom workflows &amp; permissions</li>
+          <li><i class="fa-solid fa-check"></i>Ongoing support retainer</li>
+          <li><i class="fa-solid fa-check"></i>Scoped timeline</li>
+        </ul>
+        <a href="https://wa.me/27698980677?text=Hi%20Muzziey!%20I%20would%20like%20to%20talk%20about%20your%20custom%20Enterprise%20website%20development."
+   target="_blank"
+   class="price-btn">
+   Let's Talk
+</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== SERVICES ==================== -->
+<section id="services">
+  <div class="wrap">
+    <div class="eyebrow">03 — Services</div>
+    <div class="section-head">
+      <h2>What I build</h2>
+      <p>Every engagement starts with the same question: what is this software actually supposed to make easier? The answer decides everything that follows.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-index">2.1</div>
+        <i class="fa-solid fa-display"></i>
+        <h3>Web Applications</h3>
+        <p>Custom-built web apps for whatever your business actually does — not a template stretched to fit.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-index">2.2</div>
+        <i class="fa-solid fa-diagram-project"></i>
+        <h3>Business Management Systems</h3>
+        <p>Internal tools that replace spreadsheets and group chats with one clear source of truth.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-index">2.3</div>
+        <i class="fa-solid fa-calendar-check"></i>
+        <h3>Booking &amp; Scheduling</h3>
+        <p>Reliable booking systems with reminders, availability rules and no double-bookings.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-index">2.4</div>
+        <i class="fa-solid fa-code"></i>
+        <h3>Custom Software</h3>
+        <p>When nothing off-the-shelf fits, I design and build the thing that does.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-index">2.5</div>
+        <i class="fa-solid fa-pen-ruler"></i>
+        <h3>UI / UX Design</h3>
+        <p>Interfaces built around how your team and customers actually move through a task.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-index">2.6</div>
+        <i class="fa-solid fa-plug"></i>
+        <h3>Integrations &amp; APIs</h3>
+        <p>Connecting the tools you already use so data stops living in three different places.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+
+<!-- ==================== FAQ ==================== -->
+<section id="solutions">
+
+<div class="wrap">
+
+<div class="eyebrow">04 — FAQ</div>
+
+<div class="section-head">
+<h2>Questions clients usually ask.</h2>
+<p>
+Everything you need to know before we start building your project.
+</p>
+</div>
+
+<div class="faq">
+
+<div class="faq-item active">
+
+<button class="faq-question">
+
+<span>How long does a project usually take?</span>
+
+<i class="fas fa-plus"></i>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+Small websites usually take 1–2 weeks, while larger web applications,
+booking platforms and business systems generally take between
+4–8 weeks depending on complexity.
+</p>
+
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+<span>Can you redesign my current website?</span>
+
+<i class="fas fa-plus"></i>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+Absolutely. I can redesign outdated websites, improve performance,
+modernize the interface and make everything fully responsive.
+</p>
+
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+<span>Will my website work on mobile devices?</span>
+
+<i class="fas fa-plus"></i>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+Yes. Every project is optimized for phones, tablets and desktop computers.
+</p>
+
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+<span>Can you build custom software for my business?</span>
+
+<i class="fas fa-plus"></i>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+Yes. I specialize in booking systems, inventory systems,
+business management software, dashboards and completely custom platforms.
+</p>
+
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+<span>Do you offer maintenance after launch?</span>
+
+<i class="fas fa-plus"></i>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+Yes. I provide maintenance, updates, bug fixes and new features whenever
+your business grows.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== ABOUT ==================== -->
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow">05 — About</div>
+    <div class="about-grid">
+      <div>
+<h2>I don't just build websites—</h2>
+
+<p>Software Developer • Entrepreneur • Creative Developer. I create custom websites, business management systems, mobile apps, e-commerce platforms, automation tools, branding, and digital experiences that help individuals, startups, and companies stand out and scale.</p>
+        <!-- SOCIAL ICONS -->
+<div style="margin-top:20px; display:flex; gap:14px; align-items:center;">
+
+  <a href="https://www.instagram.com/muzziey_toxin/?hl=en" target="_blank" aria-label="Instagram"
+     style="color:var(--muted); font-size:18px; transition:.25s;">
+    <i class="fa-brands fa-instagram"></i>
+  </a>
+
+  <a href="https://www.tiktok.com/@muzziey_" target="_blank" aria-label="TikTok"
+     style="color:var(--muted); font-size:18px; transition:.25s;">
+    <i class="fa-brands fa-tiktok"></i>
+  </a>
+
+  <a href="https://www.youtube.com/@muzzieytoxin" target="_blank" aria-label="YouTube"
+     style="color:var(--muted); font-size:18px; transition:.25s;">
+    <i class="fa-brands fa-youtube"></i>
+  </a>
+
+  <a href="https://github.com/muzzieydev" target="_blank" aria-label="GitHub"
+     style="color:var(--muted); font-size:18px; transition:.25s;">
+    <i class="fa-brands fa-github"></i>
+  </a>
+
+  <a href="https://www.linkedin.com/in/mzwandile-muzziey-4baba9419/?skipRedirect=true" target="_blank" aria-label="LinkedIn"
+     style="color:var(--muted); font-size:18px; transition:.25s;">
+    <i class="fa-brands fa-linkedin"></i>
+  </a>
+
+</div>
+      </div>
+      <div class="title-block">
+        <div class="title-block-header">Title Block</div>
+        <div class="title-block-row"><span>Name</span><span>Muzziey_Toxin</span></div>
+        <div class="title-block-row"><span>Role</span><span>Full Stack Engineer</span></div>
+        <div class="title-block-row"><span>Stack</span><span>React · Node.js · SQL</span></div>
+        <div class="title-block-row"><span>Focus</span><span>Business Systems</span></div>
+        <div class="title-block-row"><span>Based</span><span>Johannesburg / Gauteng</span></div>
+        <div class="title-block-row"><span>Status</span><span>Available</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ==================== PROJECTS ==================== -->
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">06 — Projects</div>
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <p>A few of the systems I've designed and built. Case studies available on request for more projects i send my cv </p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-thumb">
+    <img src="assets/images/library.png" alt="Library Management System">
+</div>
+        <div class="project-body">
+          <span class="project-tag">Education</span>
+
+<h3>Library Management System</h3>
+
+<p>
+A complete desktop-ready web application built for managing books,
+students, borrowing, returns, fines and librarian administration.
+Designed using PHP, MySQL and Bootstrap.
+</p>
+
+<div class="project-stack">
+    <span>PHP</span>
+    <span>MySQL</span>
+    <span>Bootstrap</span>
+    <span>XAMPP</span>
+</div>
+<div class="project-actions">
+
+<a href="#" class="project-link" id="openLibrary">
+    View Project
+    <i class="fa-solid fa-arrow-right"></i>
+</a>
+
+<div class="modal-buttons">
+
+    <button id="watchDemo" class="demo-btn">
+        <i class="fa-solid fa-play"></i>
+        Watch Demo
+    </button>
+<div class="video-container" id="videoContainer">
+
+    <video id="libraryVideo" controls>
+
+        <source src="assets/videos/library.mp4" type="video/mp4">
+
+        Your browser does not support video.
+
+    </video>
+
+</div>
+</div>
+
+</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ==================== CONTACT ==================== -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">07 — Contact</div>
+    <div class="section-head">
+      <h2>Let's draft your system</h2>
+      <p>Tell me what's slowing your business down and I'll tell you what it would take to fix it.</p>
+    </div>
+    <div class="contact-grid">
+    <form
+    class="form-card"
+    action="https://formspree.io/f/mojopywg"
+    method="POST">
+
+    <div class="form-row">
+
+        <div class="field">
+            <label>Name</label>
+            <input
+                type="text"
+                name="name"
+                required>
+        </div>
+
+        <div class="field">
+            <label>Email</label>
+            <input
+                type="email"
+                name="email"
+                required>
+        </div>
+
+    </div>
+
+    <div class="field full">
+        <label>Project Type</label>
+
+        <select name="project_type">
+            <option>Web Application</option>
+            <option>Business Management System</option>
+            <option>Booking / Scheduling System</option>
+            <option>Custom Software</option>
+            <option>Not sure yet</option>
+        </select>
+    </div>
+
+    <div class="field">
+        <label>Budget</label>
+
+        <select name="budget">
+            <option>Under R1 500</option>
+            <option>R2 000 - R5 000</option>
+            <option>R5 000 - R10 000</option>
+            <option>R10 000+</option>
+        </select>
+    </div>
+
+    <div class="field full">
+        <label>Project Details</label>
+
+        <textarea
+            name="message"
+            required></textarea>
+    </div>
+
+    <input
+        type="hidden"
+        name="_subject"
+        value="New Portfolio Enquiry">
+
+    <button
+        type="submit"
+        class="btn-primary">
+        Send Message
+    </button>
+
+</form>
+
+
+      <div class="contact-info">
+        <div class="title-block">
+          <div class="title-block-header">Contact Sheet</div>
+          <div class="title-block-row"><span>Response time</span><span>Within 24h</span></div>
+          <div class="title-block-row"><span>Availability</span><span>Open for projects</span></div>
+        </div>
+        <div class="contact-meta">
+          <div class="contact-meta-item">
+            <i class="fa-solid fa-envelope"></i>
+            <div><span>Email</span><strong>muzziey.dev@gmail.com</strong></div>
+          </div>
+          <div class="contact-meta-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div><span>Location</span><strong>Remote — Worldwide</strong></div>
+          </div>
+          <div class="contact-meta-item">
+            <i class="fa-brands fa-github"></i>
+            <div><span>Code</span><strong>github.com/muzzieytoxin</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Floating Contact Buttons -->
+<div class="floating-contact">
+
+    <!-- WhatsApp -->
+    <a
+        href="https://wa.me/27698980677?text=Hi%20Muzziey,%20I'm%20interested%20in%20a%20website."
+        target="_blank"
+        class="contact-btn whatsapp">
+
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>WhatsApp</span>
+
+    </a>
+
+    <!-- Book a Call -->
+   <a
+href="https://calendly.com/muzzieytoxin/30min"
+target="_blank"
+class="contact-btn calendar">
+
+<i class="fa-solid fa-calendar-days"></i>
+<span>Book a Call</span>
+
+</a>
+
+</div>
+</section>
+
+<footer>
+  <div class="footer-left">© 2026 Muzziey_Toxin — All rights reserved.</div>
+  <div class="footer-social">
+    <a href="https://github.com/muzzieydev" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/mzwandile-muzziey-4baba9419/?skipRedirect=true" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+    <a href="https://www.instagram.com/muzziey_toxin/?hl=en" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+  </div>
+</footer>
+<!-- ================= PROJECT MODAL ================= -->
+
+<div class="project-modal" id="libraryModal">
+
+<div class="modal-content">
+
+<button class="close-modal" id="closeLibrary">
+    <i class="fa-solid fa-xmark"></i>
+</button>
+
+<h2>Library Management System</h2>
+
+<p class="modal-description">
+A complete Library Management System built using
+<strong>PHP</strong>, <strong>MySQL</strong>,
+<strong>Bootstrap</strong> and <strong>XAMPP</strong>.
+It allows librarians to manage books, students,
+borrowing, returns and reports.
+</p>
+
+<div class="modal-image">
+
+<img
+id="currentImage"
+src="assets/library/dashboard.png"
+alt="Library System">
+
+</div>
+
+<div class="image-buttons">
+
+<button id="prevImage">
+<i class="fa-solid fa-chevron-left"></i>
+</button>
+
+<button id="nextImage">
+<i class="fa-solid fa-chevron-right"></i>
+</button>
+
+</div>
+
+<div class="thumbs">
+
+<img src="assets/library/dashboard.png" class="thumb active">
+
+<img src="assets/library/login.png" class="thumb">
+
+<img src="assets/library/books.png" class="thumb">
+
+<img src="assets/library/students.png" class="thumb">
+
+<img src="assets/library/borrow.png" class="thumb">
+
+<img src="assets/library/return.png" class="thumb">
+
+<img src="assets/library/reports.png" class="thumb">
+
+</div>
+
+</div>
+
+</div>
+<script>
+
+const navToggle = document.getElementById("navToggle");
+const menu = document.getElementById("menu");
+
+navToggle.addEventListener("click", () => {
+    menu.classList.toggle("active");
+    navToggle.classList.toggle("active");
+});
+
+// Close menu on link click
+document.querySelectorAll(".menu a").forEach(link=>{
+    link.addEventListener("click",()=>{
+        menu.classList.remove("active");
+        navToggle.classList.remove("active");
+    });
+});
+// FAQ Accordion
+
+document.querySelectorAll(".faq-question").forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+const item = button.parentElement;
+
+document.querySelectorAll(".faq-item").forEach(faq=>{
+
+if(faq!==item){
+faq.classList.remove("active");
+}
+
+});
+
+item.classList.toggle("active");
+
+});
+
+});
+// ================= PROJECT GALLERY =================
+
+const openLibrary = document.getElementById("openLibrary");
+const closeLibrary = document.getElementById("closeLibrary");
+const libraryModal = document.getElementById("libraryModal");
+
+openLibrary.addEventListener("click",(e)=>{
+
+e.preventDefault();
+
+libraryModal.classList.add("show");
+
+});
+
+closeLibrary.addEventListener("click",()=>{
+
+libraryModal.classList.remove("show");
+
+});
+
+libraryModal.addEventListener("click",(e)=>{
+
+if(e.target===libraryModal){
+
+libraryModal.classList.remove("show");
+
+}
+
+});
+
+const images=[
+
+"assets/library/dashboard.png",
+
+"assets/library/login.png",
+
+"assets/library/books.png",
+
+"assets/library/students.png",
+
+"assets/library/borrow.png",
+
+"assets/library/return.png",
+
+"assets/library/reports.png"
+
+];
+
+let current=0;
+
+const mainImage=document.getElementById("currentImage");
+
+const thumbs=document.querySelectorAll(".thumb");
+
+function showImage(index){
+
+current=index;
+
+mainImage.src=images[current];
+
+thumbs.forEach(t=>t.classList.remove("active"));
+
+thumbs[current].classList.add("active");
+
+}
+
+document.getElementById("nextImage").onclick=()=>{
+
+showImage((current+1)%images.length);
+
+}
+
+document.getElementById("prevImage").onclick=()=>{
+
+showImage((current-1+images.length)%images.length);
+
+}
+
+thumbs.forEach((thumb,index)=>{
+
+thumb.addEventListener("click",()=>{
+
+showImage(index);
+
+});
+
+});
+const watchDemo = document.getElementById("watchDemo");
+
+const videoContainer = document.getElementById("videoContainer");
+
+const libraryVideo = document.getElementById("libraryVideo");
+
+watchDemo.addEventListener("click",()=>{
+
+    videoContainer.classList.toggle("show");
+
+    libraryVideo.play();
+
+});
+
+</script>
+</body>
+</html>
